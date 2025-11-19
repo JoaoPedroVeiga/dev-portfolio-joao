@@ -1,28 +1,28 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState("home");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   const navItems = [
-    { name: 'Home', path: '#home' },
-    { name: 'Sobre', path: '#sobre' },
-    { name: 'Tecnologias', path: '#tecnologias' },
-    { name: 'Projetos', path: '#projetos' },
-    { name: 'Contato', path: '#contato' },
+    { name: "Home", path: "#home" },
+    { name: "Sobre", path: "#sobre" },
+    { name: "Tecnologias", path: "#tecnologias" },
+    { name: "Projetos", path: "#projetos" },
+    { name: "Contato", path: "#contato" },
   ];
 
   const handleNavClick = (path: string) => {
     setIsMenuOpen(false);
     const element = document.querySelector(path);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
       // Atualiza a seção ativa imediatamente
       setActiveSection(path.substring(1));
     }
@@ -31,8 +31,8 @@ export default function Header() {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: '0px',
-      threshold: 0.5, // Quando 50% da seção está visível
+      rootMargin: "0px",
+      threshold: 0.5,
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -60,7 +60,7 @@ export default function Header() {
         }
       });
     };
-  }, []);
+  }, [navItems]); // ← Adicione navItems aqui
 
   return (
     <header className="bg-black text-gray-300 py-3 px-6 fixed w-full z-50 md:py-4 ">
@@ -72,7 +72,9 @@ export default function Header() {
               <button
                 onClick={() => handleNavClick(item.path)}
                 className={`hover:text-blue-500 transition-colors px-4 py-1 rounded-lg cursor-pointer ${
-                  activeSection === item.path.substring(1) ? 'text-blue-500 font-medium ' : ''
+                  activeSection === item.path.substring(1)
+                    ? "text-blue-500 font-medium "
+                    : ""
                 }`}
               >
                 {item.name}
@@ -109,7 +111,7 @@ export default function Header() {
       {/* Mobile Menu Overlay */}
       <div
         className={`fixed top-0 left-0 w-full h-full bg-black z-40 transform transition-transform duration-300 ease-in-out ${
-          isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
         } md:hidden`}
       >
         <div className="flex justify-end p-4">
@@ -141,7 +143,9 @@ export default function Header() {
                 <button
                   onClick={() => handleNavClick(item.path)}
                   className={`text-2xl hover:text-white transition-colors w-full py-4 px-6 rounded-lg   ${
-                    activeSection === item.path.substring(1) ? 'text-blue-500 font-medium ' : ''
+                    activeSection === item.path.substring(1)
+                      ? "text-blue-500 font-medium "
+                      : ""
                   }`}
                 >
                   {item.name}

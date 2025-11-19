@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, RefObject } from "react";
 import Head from "next/head";
+import Image from "next/image";
 
 const projectsData = [
   {
@@ -21,7 +22,8 @@ const projectsData = [
       "Docker",
     ],
     imageUrl: "fotos/projetos/e-commerce.png",
-    videoUrl: "/video/E-commerce Store - Google Chrome 2025-11-10 18-24-45.webm",   
+    videoUrl:
+      "/video/E-commerce Store - Google Chrome 2025-11-10 18-24-45.webm",
     link: "https://github.com/JoaoPedroVeiga/e-commerce",
   },
   {
@@ -68,18 +70,22 @@ const projectsData = [
 ];
 
 export default function Projetos() {
+  const videoRef: RefObject<HTMLVideoElement> = useRef<HTMLVideoElement>(null);
   const [selectedProject, setSelectedProject] = useState(null);
-  const videoRef = useRef(null);
 
   // Fechar modal com ESC
   useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.keyCode === 27) setSelectedProject(null);
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelectedProject(null);
+      }
     };
 
     if (selectedProject) {
       window.addEventListener("keydown", handleEsc);
-      return () => window.removeEventListener("keydown", handleEsc);
+      return () => {
+        window.removeEventListener("keydown", handleEsc);
+      };
     }
   }, [selectedProject]);
 
@@ -89,7 +95,7 @@ export default function Projetos() {
       // Pequeno delay para garantir que o modal está completamente renderizado
       const timer = setTimeout(() => {
         if (videoRef.current) {
-          videoRef.current.play().catch(error => {
+          videoRef.current.play().catch((error) => {
             console.log("Autoplay prevented:", error);
             // Em alguns navegadores, o autoplay pode ser bloqueado
             // O usuário precisará iniciar o vídeo manualmente
@@ -136,7 +142,9 @@ export default function Projetos() {
       <main className="max-w-7xl mx-auto">
         {/* Título com detalhe minimalista */}
         <div className="max-w-4xl mx-auto text-center mb-12">
-          <h1 className="text-3xl font-light text-black tracking-wider mb-2">PROJETOS</h1>
+          <h1 className="text-3xl font-light text-black tracking-wider mb-2">
+            PROJETOS
+          </h1>
           <div className="w-16 h-0.5 bg-black mx-auto"></div>
         </div>
 
@@ -151,14 +159,16 @@ export default function Projetos() {
             >
               {/* Imagem com overlay no hover */}
               <div className="relative h-48 bg-gray-100 overflow-hidden">
-                <img
+                <Image
                   src={project.imageUrl}
                   alt={project.title}
+                  width={400} // ← Definir width
+                  height={192} // ← Definir height (48 * 4 = 192)
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
               </div>
-              
+
               <div className="p-6">
                 <h2 className="text-xl font-normal mb-3 text-black uppercase tracking-wider border-b border-black pb-2">
                   {project.title}
@@ -228,7 +238,9 @@ export default function Projetos() {
                   </h2>
 
                   <div className="mb-8">
-                    <h3 className="text-lg font-normal text-black uppercase tracking-wider mb-3">Descrição</h3>
+                    <h3 className="text-lg font-normal text-black uppercase tracking-wider mb-3">
+                      Descrição
+                    </h3>
                     <p className="text-gray-800 leading-relaxed">
                       {selectedProject.description}
                     </p>

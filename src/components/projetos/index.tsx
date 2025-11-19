@@ -70,7 +70,7 @@ const projectsData = [
 ];
 
 export default function Projetos() {
-  const videoRef: RefObject<HTMLVideoElement> = useRef<HTMLVideoElement>(null);
+  const videoRef: RefObject<HTMLVideoElement | null> = useRef<HTMLVideoElement | null>(null);
   const [selectedProject, setSelectedProject] = useState(null);
 
   // Fechar modal com ESC

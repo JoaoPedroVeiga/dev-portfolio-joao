@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Compensa o header fixo */
+}
+
+/* Estilo para seções */
+section {
+  scroll-margin-top: 80px; /* Igual ao scroll-padding-top */
+}
 
 body {
   background: var(--background);

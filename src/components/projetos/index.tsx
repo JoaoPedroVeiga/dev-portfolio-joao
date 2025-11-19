@@ -4,7 +4,17 @@ import { useState, useEffect, useRef, RefObject } from "react";
 import Head from "next/head";
 import Image from "next/image";
 
-const projectsData = [
+type Project = {
+  id: number;
+  title: string;
+  description: string;
+  technologies: string[];
+  imageUrl: string;
+  videoUrl: string;
+  link: string;
+};
+
+const projectsData: Project[] = [
   {
     id: 1,
     title: "E-commerce",
@@ -71,7 +81,7 @@ const projectsData = [
 
 export default function Projetos() {
   const videoRef: RefObject<HTMLVideoElement | null> = useRef<HTMLVideoElement | null>(null);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   // Fechar modal com ESC
   useEffect(() => {
@@ -117,7 +127,7 @@ export default function Projetos() {
     };
   }, []);
 
-  const handleProjectClick = (project) => {
+  const handleProjectClick = (project: Project) => {
     setSelectedProject(project);
   };
 

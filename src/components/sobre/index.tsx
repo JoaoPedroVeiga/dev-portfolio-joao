@@ -9,7 +9,7 @@ export default function Sobre() {
         
         {/* Coloque seu arquivo PDF na pasta public/ do Next.js */}
         <a 
-          href="https://drive.google.com/file/d/1qORH6LQunowWT2S3-wievxuifky70gqH/view?usp=drive_link" // Caminho para o arquivo na pasta public
+          href="https://drive.google.com/file/d/1SWRXrWy4Hj21-SkYwFg0VGMupaxGqVN-/view?usp=sharing" // Caminho para o arquivo na pasta public
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block relative overflow-hidden border-2 border-b-black px-6 py-3 text-sm sm:text-base transition-all duration-500

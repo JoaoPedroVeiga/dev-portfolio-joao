@@ -7,6 +7,11 @@ import Tecnologias from '@/components/Tecnologias';
 import Image from 'next/image';
 import Link from 'next/link';
 
+metadata = {
+  title: 'João Pedro Veiga - Desenvolvedor Full Stack',
+  description: 'Portfólio de João Pedro Veiga, Desenvolvedor Full Stack especializado em TypeScript, Node.js, Next.js e React. Explore meus projetos, habilidades e entre em contato!',
+}
+
 export default function Home() {
   return (
     <>
